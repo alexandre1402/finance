@@ -1,0 +1,644 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="fr"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Mini-Cours : Marchés Financiers&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.jsdelivr.net/npm/chart.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Visualization &amp; Content Choices:</p>
+<p class="p1"><span class="Apple-converted-space">    </span>- Accueil &amp; Fondamentaux: Text blocks, Unicode icons for concepts. Goal: Inform. Method: HTML/Tailwind. Interaction: Clear presentation. Justification: Clarity for basics.</p>
+<p class="p1"><span class="Apple-converted-space">    </span>- Places &amp; Indices: Cards for places &amp; indices. Goal: Explore. Method: HTML/Tailwind. Interaction: Visual grouping. Justification: Engaging exploration.</p>
+<p class="p1"><span class="Apple-converted-space">    </span>- Produits: Tabbed interface for product details (Actions, Obligations, Dérivés, Autres). Goal: Organize &amp; Inform. Method: HTML/Tailwind + JS for tabs. Interaction: Click to switch tabs. Justification: Structured presentation of dense info.</p>
+<p class="p1"><span class="Apple-converted-space">    </span>- Investir: Tabbed interface for accounts &amp; providers. Goal: Organize &amp; Inform. Method: HTML/Tailwind + JS for tabs. Interaction: Click to switch tabs. Justification: Consistent structure.</p>
+<p class="p1"><span class="Apple-converted-space">    </span>- Analyse &amp; Trading: Tabbed interface (Fondamentale, Technique, Bases du Trading). Interactive Chart.js for technical (line chart for price + volume bars, toggle MAs, RSI for "GreenEnergy Corp" example). Goal: Demonstrate &amp; Teach. Method: Chart.js, HTML/Tailwind, JS. Interaction: Chart controls, tooltips. Justification: Tangible learning of chart analysis.</p>
+<p class="p1"><span class="Apple-converted-space">    </span>- Ressources: List of links. Goal: Reference. Method: HTML/Tailwind. Justification: Utility.</p>
+<p class="p1"><span class="Apple-converted-space">    </span>CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body { font-family: 'Inter', sans-serif; background-color: #F8F9FA; color: #343A40; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.nav-link { transition: all 0.3s ease; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.nav-link.active { color: #007BFF; font-weight: 600; border-bottom: 2px solid #007BFF; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.content-section { display: none; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.content-section.active { display: block; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.tab-button { transition: all 0.3s ease; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.tab-button.active { background-color: #007BFF; color: white; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.tab-content { display: none; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.tab-content.active { display: block; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.chart-container { position: relative; width: 100%; max-width: 700px; margin-left: auto; margin-right: auto; height: 350px; max-height: 450px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@media (min-width: 768px) { .chart-container { height: 400px; } }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Ensure fonts are loaded */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body class="antialiased"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;header class="bg-white shadow-md sticky top-0 z-50"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;nav class="container mx-auto px-4 sm:px-6 lg:px-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="flex items-center justify-between h-16"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="flex items-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="font-bold text-xl text-[#007BFF]"&gt;Marchés Financiers 101&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="hidden md:block"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="ml-10 flex items-baseline space-x-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;a href="#accueil" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-[#007BFF] hover:bg-gray-100"&gt;Accueil&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;a href="#fondamentaux" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-[#007BFF] hover:bg-gray-100"&gt;Fondamentaux&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;a href="#places" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-[#007BFF] hover:bg-gray-100"&gt;Places &amp; Indices&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;a href="#produits" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-[#007BFF] hover:bg-gray-100"&gt;Produits&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;a href="#investir" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-[#007BFF] hover:bg-gray-100"&gt;Investir&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;a href="#analyse" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-[#007BFF] hover:bg-gray-100"&gt;Analyse &amp; Trading&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;a href="#ressources" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-[#007BFF] hover:bg-gray-100"&gt;Ressources&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="md:hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button id="mobile-menu-button" class="text-gray-700 hover:text-[#007BFF] focus:outline-none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="mobile-menu" class="md:hidden hidden pb-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="#accueil" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-[#007BFF] hover:bg-gray-100"&gt;Accueil&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="#fondamentaux" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-[#007BFF] hover:bg-gray-100"&gt;Fondamentaux&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="#places" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-[#007BFF] hover:bg-gray-100"&gt;Places &amp; Indices&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="#produits" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-[#007BFF] hover:bg-gray-100"&gt;Produits&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="#investir" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-[#007BFF] hover:bg-gray-100"&gt;Investir&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="#analyse" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-[#007BFF] hover:bg-gray-100"&gt;Analyse &amp; Trading&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="#ressources" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-[#007BFF] hover:bg-gray-100"&gt;Ressources&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/nav&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/header&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;main class="container mx-auto p-4 sm:p-6 lg:p-8"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section id="accueil" class="content-section active pt-5"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="bg-white p-6 rounded-lg shadow"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h1 class="text-3xl font-bold mb-4 text-[#007BFF]"&gt;Bienvenue !&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="mb-4"&gt;Bienvenue dans ce mini-cours interactif sur le fonctionnement des marchés financiers. Cet outil est conçu pour vous donner une base solide et claire, en vous guidant à travers les concepts clés, les acteurs majeurs, les produits disponibles et les bases de l'analyse et du trading.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="mb-4"&gt;Naviguez à travers les sections en utilisant le menu en haut de la page. Chaque section aborde un aspect spécifique des marchés financiers, avec des explications et des exemples. L'objectif est de rendre cet apprentissage aussi accessible et engageant que possible.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p&gt;Bonne exploration !&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section id="fondamentaux" class="content-section pt-5"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="bg-white p-6 rounded-lg shadow"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2 class="text-2xl font-bold mb-6 text-[#007BFF]"&gt;Introduction : Le Rôle des Marchés Financiers et Concepts Fondamentaux&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="mb-4"&gt;Pour comprendre les marchés financiers, il est essentiel de saisir leur rôle central dans l'économie et les concepts qui les sous-tendent. Un marché financier est un lieu (physique ou virtuel) où se rencontrent l'offre et la demande de capitaux. Son rôle principal est d'allouer efficacement le capital.&lt;/p&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="space-y-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-xl font-semibold mb-2"&gt;Concepts Économiques et Financiers Fondamentaux&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;ul class="list-disc list-inside space-y-3 pl-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;&lt;strong&gt;L'Offre et la Demande :&lt;/strong&gt; Le prix des actifs financiers est déterminé par l'équilibre entre l'offre (quantité de titres disponibles) et la demande (intérêt des investisseurs). &lt;span class="text-sm text-gray-600"&gt;Ex: Si beaucoup de gens veulent acheter une action (forte demande) et peu veulent la vendre (faible offre), son prix monte.&lt;/span&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;&lt;strong&gt;La Liquidité :&lt;/strong&gt; Facilité avec laquelle un actif peut être acheté ou vendu sans affecter significativement son prix. &lt;span class="text-sm text-gray-600"&gt;Ex: Les actions des grandes entreprises sont généralement très liquides.&lt;/span&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;&lt;strong&gt;Le Risque et le Rendement :&lt;/strong&gt; Généralement, plus un investissement est potentiellement rentable (rendement élevé), plus il est risqué. &lt;span class="text-sm text-gray-600"&gt;Ex: Les actions peuvent offrir de forts rendements mais sont plus risquées que les obligations d'État.&lt;/span&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;&lt;strong&gt;La Volatilité :&lt;/strong&gt; Mesure de l'ampleur des variations de prix d'un actif. Une forte volatilité signifie que le prix peut changer rapidement. &lt;span class="text-sm text-gray-600"&gt;Ex: Les actions des jeunes entreprises technologiques sont souvent plus volatiles.&lt;/span&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;&lt;strong&gt;La Diversification :&lt;/strong&gt; Répartir ses investissements sur différents actifs pour réduire le risque global. &lt;span class="text-sm text-gray-600"&gt;Ex: Ne pas mettre tous ses œufs dans le même panier.&lt;/span&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;&lt;strong&gt;L'Inflation :&lt;/strong&gt; Augmentation générale des prix, réduisant le pouvoir d'achat. Les investissements doivent viser un rendement supérieur à l'inflation. &lt;span class="text-sm text-gray-600"&gt;Ex: Si l'inflation est de 2%, un placement qui rapporte 1% fait perdre du pouvoir d'achat.&lt;/span&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section id="places" class="content-section pt-5"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="bg-white p-6 rounded-lg shadow"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2 class="text-2xl font-bold mb-6 text-[#007BFF]"&gt;Principales Places Financières et Indices&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="mb-4"&gt;Les marchés financiers sont mondiaux, mais certaines places concentrent une grande partie de l'activité. Chaque place est généralement associée à des indices boursiers qui reflètent la performance de son marché.&lt;/p&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="grid md:grid-cols-2 gap-6 mb-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-xl font-semibold mb-3"&gt;Principales Places Financières&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="space-y-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="p-3 bg-gray-50 rounded-md border border-gray-200"&gt;&lt;strong&gt;New York (NYSE, Nasdaq) :&lt;/strong&gt; USA, la plus grande au monde.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="p-3 bg-gray-50 rounded-md border border-gray-200"&gt;&lt;strong&gt;Londres (LSE) :&lt;/strong&gt; Royaume-Uni, centre majeur en Europe.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="p-3 bg-gray-50 rounded-md border border-gray-200"&gt;&lt;strong&gt;Tokyo (TSE) :&lt;/strong&gt; Japon, la plus grande d'Asie.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="p-3 bg-gray-50 rounded-md border border-gray-200"&gt;&lt;strong&gt;Shanghai/Shenzhen (SSE, SZSE) :&lt;/strong&gt; Chine, en forte croissance.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="p-3 bg-gray-50 rounded-md border border-gray-200"&gt;&lt;strong&gt;Paris (Euronext Paris) :&lt;/strong&gt; France, principal centre de la zone euro.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="p-3 bg-gray-50 rounded-md border border-gray-200"&gt;&lt;strong&gt;Francfort (Deutsche Börse) :&lt;/strong&gt; Allemagne, important pour l'industrie.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-xl font-semibold mb-3"&gt;Principaux Indices Boursiers&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="space-y-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="p-3 bg-gray-50 rounded-md border border-gray-200"&gt;&lt;strong&gt;Dow Jones (DJIA), S&amp;P 500, Nasdaq Composite :&lt;/strong&gt; USA&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="p-3 bg-gray-50 rounded-md border border-gray-200"&gt;&lt;strong&gt;FTSE 100 :&lt;/strong&gt; Royaume-Uni&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="p-3 bg-gray-50 rounded-md border border-gray-200"&gt;&lt;strong&gt;Nikkei 225 :&lt;/strong&gt; Japon&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="p-3 bg-gray-50 rounded-md border border-gray-200"&gt;&lt;strong&gt;Shanghai Comp., CSI 300 :&lt;/strong&gt; Chine&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="p-3 bg-gray-50 rounded-md border border-gray-200"&gt;&lt;strong&gt;CAC 40 :&lt;/strong&gt; France&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="p-3 bg-gray-50 rounded-md border border-gray-200"&gt;&lt;strong&gt;DAX 40 :&lt;/strong&gt; Allemagne&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="p-3 bg-gray-50 rounded-md border border-gray-200"&gt;&lt;strong&gt;Euro Stoxx 50 :&lt;/strong&gt; Zone Euro&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="text-sm text-gray-600"&gt;Un indice boursier est un indicateur qui mesure la performance d'un ensemble de titres représentatifs d'un marché ou d'un secteur. Par exemple, le CAC 40 reflète la performance des 40 plus grandes entreprises françaises.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section id="produits" class="content-section pt-5"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="bg-white p-6 rounded-lg shadow"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2 class="text-2xl font-bold mb-6 text-[#007BFF]"&gt;Produits Proposés par les Marchés Boursiers&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="mb-4"&gt;Les marchés financiers offrent une grande diversité de produits, chacun avec ses caractéristiques de risque et de rendement. Voici les principaux :&lt;/p&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="produits-tabs-buttons" class="mb-4 border-b border-gray-200"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;nav class="flex space-x-1 -mb-px" aria-label="Tabs"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button data-tab="actions" class="produits-tab-button whitespace-nowrap py-3 px-4 border-b-2 font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300"&gt;Actions&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button data-tab="obligations" class="produits-tab-button whitespace-nowrap py-3 px-4 border-b-2 font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300"&gt;Obligations&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button data-tab="derives" class="produits-tab-button whitespace-nowrap py-3 px-4 border-b-2 font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300"&gt;Produits Dérivés&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button data-tab="autresProduits" class="produits-tab-button whitespace-nowrap py-3 px-4 border-b-2 font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300"&gt;Autres Produits&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/nav&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="produits-tabs-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div data-tab-content="actions" class="produits-tab-content p-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-xl font-semibold mb-2"&gt;Actions&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p&gt;&lt;strong&gt;Définition :&lt;/strong&gt; Titre de propriété représentant une fraction du capital d'une entreprise. Devenir actionnaire = co-propriétaire.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p&gt;&lt;strong&gt;Comment ça rapporte ?&lt;/strong&gt; Plus-value (vente plus chère que l'achat), dividendes (part des bénéfices, non garantis).&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p&gt;&lt;strong&gt;Risques :&lt;/strong&gt; Perte en capital, volatilité, faillite de l'entreprise.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-sm text-gray-600 mt-1"&gt;&lt;em&gt;Exemple : Acheter 10 actions "TechInnov" à 100€. Si le cours monte à 120€, plus-value de 20€/action.&lt;/em&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div data-tab-content="obligations" class="produits-tab-content p-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-xl font-semibold mb-2"&gt;Obligations&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p&gt;&lt;strong&gt;Définition :&lt;/strong&gt; Titre de créance. Vous prêtez de l'argent à une entité (État, entreprise) contre un intérêt (coupon) et remboursement du capital à l'échéance.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p&gt;&lt;strong&gt;Comment ça rapporte ?&lt;/strong&gt; Coupons réguliers, remboursement du capital, plus-value sur marché secondaire.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p&gt;&lt;strong&gt;Risques :&lt;/strong&gt; Risque de taux d'intérêt, risque de crédit (défaut de l'émetteur), risque d'inflation.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-sm text-gray-600 mt-1"&gt;&lt;em&gt;Exemple : Obligation d'État 1000€, taux 3%, échéance 5 ans. Vous recevez 30€/an et 1000€ à la fin.&lt;/em&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div data-tab-content="derives" class="produits-tab-content p-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-xl font-semibold mb-2"&gt;Produits Dérivés (Contrats)&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p&gt;&lt;strong&gt;Définition :&lt;/strong&gt; Instruments dont la valeur "dérive" de celle d'un actif sous-jacent (action, indice, matière première...). Souvent utilisés pour spéculation ou couverture. Très risqués.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;ul class="list-disc list-inside pl-4 space-y-1 mt-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;&lt;strong&gt;Futures (Contrats à terme) :&lt;/strong&gt; Engagement d'acheter/vendre un actif à un prix et une date futurs.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;&lt;strong&gt;Options :&lt;/strong&gt; Droit (non obligation) d'acheter (call) ou vendre (put) un actif à un prix d'exercice avant une échéance.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;&lt;strong&gt;CFD (Contracts For Difference) :&lt;/strong&gt; Spéculer sur la variation de prix sans détenir l'actif. Effet de levier important.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                         </span>&lt;p class="text-sm text-red-600 font-semibold mt-1"&gt;&lt;em&gt;Attention : Produits complexes et à haut risque, réservés aux investisseurs avertis.&lt;/em&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                     </span>&lt;div data-tab-content="autresProduits" class="produits-tab-content p-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-xl font-semibold mb-2"&gt;Autres Produits Courants&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                         </span>&lt;ul class="list-disc list-inside pl-4 space-y-1 mt-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;&lt;strong&gt;Fonds d'Investissement (OPCVM, ETF) :&lt;/strong&gt; Paniers de titres gérés par des professionnels. Les ETF (Trackers) reproduisent un indice. Permettent une diversification instantanée.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;&lt;strong&gt;Matières Premières :&lt;/strong&gt; Or, pétrole, etc. Investissement via contrats dérivés ou ETF spécialisés.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;&lt;strong&gt;Devises (Forex) :&lt;/strong&gt; Marché d'échange des monnaies. Très liquide mais volatil.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section id="investir" class="content-section pt-5"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">             </span>&lt;div class="bg-white p-6 rounded-lg shadow"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2 class="text-2xl font-bold mb-6 text-[#007BFF]"&gt;Moyens d'Acquisition et Principaux Fournisseurs&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="mb-4"&gt;Pour investir, il faut passer par des intermédiaires et choisir le bon véhicule d'investissement. Voici les options principales en France :&lt;/p&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="investir-tabs-buttons" class="mb-4 border-b border-gray-200"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;nav class="flex space-x-1 -mb-px" aria-label="Tabs"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button data-tab="cto" class="investir-tab-button whitespace-nowrap py-3 px-4 border-b-2 font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300"&gt;CTO&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button data-tab="pea" class="investir-tab-button whitespace-nowrap py-3 px-4 border-b-2 font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300"&gt;PEA&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button data-tab="assuranceVie" class="investir-tab-button whitespace-nowrap py-3 px-4 border-b-2 font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300"&gt;Assurance Vie&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button data-tab="per" class="investir-tab-button whitespace-nowrap py-3 px-4 border-b-2 font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300"&gt;PER&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                         </span>&lt;button data-tab="fournisseurs" class="investir-tab-button whitespace-nowrap py-3 px-4 border-b-2 font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300"&gt;Fournisseurs&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/nav&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="investir-tabs-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div data-tab-content="cto" class="investir-tab-content p-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-xl font-semibold mb-2"&gt;Compte Titres Ordinaire (CTO)&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p&gt;Compte de base pour investir, tous types de valeurs mobilières, toutes places. Flexible mais fiscalité standard.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div data-tab-content="pea" class="investir-tab-content p-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-xl font-semibold mb-2"&gt;Plan d'Épargne en Actions (PEA)&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p&gt;Enveloppe fiscale avantageuse pour actions européennes. Exonération d'impôt sur plus-values/dividendes après 5 ans (hors prélèvements sociaux). Plafond de versement.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div data-tab-content="assuranceVie" class="investir-tab-content p-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-xl font-semibold mb-2"&gt;Assurance Vie (Unités de Compte)&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p&gt;Contrat d'épargne avec supports en fonds euros (capital garanti, faible rendement) ou Unités de Compte (UC, investies sur les marchés, non garanti). Fiscalité avantageuse après 8 ans.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div data-tab-content="per" class="investir-tab-content p-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-xl font-semibold mb-2"&gt;Plan d'Épargne Retraite (PER)&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p&gt;Produit pour la retraite. Versements déductibles du revenu imposable. Fonds bloqués jusqu'à la retraite (sauf exceptions).&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div data-tab-content="fournisseurs" class="investir-tab-content p-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-xl font-semibold mb-2"&gt;Principaux Fournisseurs&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                         </span>&lt;ul class="list-disc list-inside pl-4 space-y-1 mt-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;&lt;strong&gt;Banques traditionnelles :&lt;/strong&gt; Offre classique, accompagnement.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;&lt;strong&gt;Banques en ligne et Courtiers en ligne (Brokers) :&lt;/strong&gt; Tarifs compétitifs, larges offres, plateformes avancées.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;&lt;strong&gt;Sociétés de Gestion d'Actifs :&lt;/strong&gt; Créent et gèrent des fonds (OPCVM, ETF).&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;&lt;strong&gt;Compagnies d'Assurance :&lt;/strong&gt; Proposent assurances vie et PER.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section id="analyse" class="content-section pt-5"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="bg-white p-6 rounded-lg shadow"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2 class="text-2xl font-bold mb-6 text-[#007BFF]"&gt;Analyser une Action et les Bases du Trading&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="mb-4"&gt;Apprendre à analyser une action est fondamental. Il existe deux approches principales : l'analyse fondamentale et l'analyse technique. Le trading est l'activité d'achat/vente à court/moyen terme pour profiter des fluctuations.&lt;/p&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="analyse-tabs-buttons" class="mb-4 border-b border-gray-200"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;nav class="flex flex-wrap space-x-1 -mb-px" aria-label="Tabs"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button data-tab="fondamentale" class="analyse-tab-button whitespace-nowrap py-3 px-4 border-b-2 font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300"&gt;Analyse Fondamentale&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button data-tab="technique" class="analyse-tab-button whitespace-nowrap py-3 px-4 border-b-2 font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300"&gt;Analyse Technique&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button data-tab="basesTrading" class="analyse-tab-button whitespace-nowrap py-3 px-4 border-b-2 font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300"&gt;Bases du Trading&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/nav&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="analyse-tabs-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div data-tab-content="fondamentale" class="analyse-tab-content p-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-xl font-semibold mb-2"&gt;Analyse Fondamentale&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p&gt;Évaluer la "valeur intrinsèque" d'une entreprise via ses données économiques/financières (chiffre d'affaires, bénéfices, endettement, marges, P/E ratio, rendement du dividende), sa stratégie, et son environnement.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-sm text-gray-600 mt-1"&gt;&lt;em&gt;Où trouver ? Rapports annuels, sites financiers (Boursorama, ZoneBourse).&lt;/em&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div data-tab-content="technique" class="analyse-tab-content p-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-xl font-semibold mb-2"&gt;Analyse Technique : Exemple GreenEnergy Corp. (GEC)&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p&gt;Étudier les graphiques de prix et volumes pour anticiper les mouvements futurs. Concepts clés :&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;ul class="list-disc list-inside pl-4 space-y-1 my-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;&lt;strong&gt;Tendance :&lt;/strong&gt; Direction générale du prix (haussière, baissière, latérale).&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;&lt;strong&gt;Supports &amp; Résistances :&lt;/strong&gt; Niveaux où le prix a tendance à rebondir ou s'arrêter.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;&lt;strong&gt;Volume :&lt;/strong&gt; Quantité de titres échangés. Confirme la force d'un mouvement.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;&lt;strong&gt;Indicateurs :&lt;/strong&gt; Moyennes Mobiles (MA), RSI (Relative Strength Index).&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="mb-2"&gt;Le graphique ci-dessous montre l'évolution du cours de GEC, avec son volume de transactions. Vous pouvez ajouter/retirer des Moyennes Mobiles et l'indicateur RSI pour observer leur comportement.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="chart-container mb-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;canvas id="stockChart"&gt;&lt;/canvas&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex flex-wrap gap-2 mb-4 items-center justify-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;button id="toggleMA20" class="bg-[#007BFF] text-white px-3 py-1.5 rounded-md text-sm hover:bg-blue-700"&gt;MA 20 jours&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;button id="toggleMA50" class="bg-[#007BFF] text-white px-3 py-1.5 rounded-md text-sm hover:bg-blue-700"&gt;MA 50 jours&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;button id="toggleRSI" class="bg-[#007BFF] text-white px-3 py-1.5 rounded-md text-sm hover:bg-blue-700"&gt;RSI&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div id="rsiChartContainer" class="chart-container h-48 max-h-48 mb-4" style="display: none;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;canvas id="rsiChart"&gt;&lt;/canvas&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                         </span>&lt;p class="text-sm text-gray-600"&gt;&lt;em&gt;Interprétation (exemple) : Si le cours de GEC franchit une résistance avec un fort volume, cela peut être un signal d'achat. Un RSI au-dessus de 70 peut indiquer une surévaluation temporaire (surachat).&lt;/em&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                     </span>&lt;div data-tab-content="basesTrading" class="analyse-tab-content p-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-xl font-semibold mb-2"&gt;Bases du Trading&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p&gt;Achat/vente d'actifs pour profits à court/moyen terme. S'appuie souvent sur l'analyse technique.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;ul class="list-disc list-inside pl-4 space-y-1 mt-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;&lt;strong&gt;Position Long (Achat) :&lt;/strong&gt; Parier sur la hausse.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;&lt;strong&gt;Position Short (Vente à Découvert) :&lt;/strong&gt; Parier sur la baisse (plus risqué).&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;&lt;strong&gt;Stop Loss :&lt;/strong&gt; Ordre pour vendre et limiter les pertes. Essentiel !&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;&lt;strong&gt;Take Profit :&lt;/strong&gt; Ordre pour vendre et prendre ses bénéfices.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;&lt;strong&gt;Effet de Levier :&lt;/strong&gt; Investir plus que son capital. Amplifie gains ET pertes. À utiliser avec extrême prudence.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-sm text-red-600 font-semibold mt-2"&gt;&lt;em&gt;Attention : Le trading est risqué. Formez-vous, utilisez des comptes démo, et ne risquez que ce que vous pouvez vous permettre de perdre.&lt;/em&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section id="ressources" class="content-section pt-5"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="bg-white p-6 rounded-lg shadow"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2 class="text-2xl font-bold mb-6 text-[#007BFF]"&gt;Conclusion et Ressources Utiles&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="mb-4"&gt;Ce mini-cours vous a fourni les bases pour comprendre les marchés financiers. C'est un domaine vaste qui nécessite un apprentissage continu. Rappelez-vous : éducation, diversification, gestion du risque, et objectifs clairs sont clés.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3 class="text-xl font-semibold mb-2"&gt;Sources et Ressources pour Approfondir :&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;ul class="list-disc list-inside space-y-2 pl-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li&gt;&lt;a href="https://www.boursorama.com" target="_blank" class="text-[#007BFF] hover:underline"&gt;Boursorama.com&lt;/a&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li&gt;&lt;a href="https://www.zonebourse.com" target="_blank" class="text-[#007BFF] hover:underline"&gt;Zonebourse.com&lt;/a&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li&gt;&lt;a href="https://www.amf-france.org" target="_blank" class="text-[#007BFF] hover:underline"&gt;Autorité des Marchés Financiers (AMF)&lt;/a&gt; - Guides pédagogiques.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li&gt;&lt;a href="https://www.investopedia.com" target="_blank" class="text-[#007BFF] hover:underline"&gt;Investopedia.com&lt;/a&gt; (en anglais)&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                 </span>&lt;p class="mt-4 text-sm text-gray-600"&gt;Consultez toujours plusieurs sources et soyez critique face à l'information. La formation continue est la meilleure alliée de l'investisseur.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/main&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;footer class="text-center p-4 text-sm text-gray-600 border-t border-gray-200 mt-10"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>© 2024 Mini-Cours Marchés Financiers. Contenu à but éducatif uniquement.</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/footer&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.addEventListener('DOMContentLoaded', function () {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const navLinks = document.querySelectorAll('.nav-link');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const sections = document.querySelectorAll('.content-section');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const mobileMenuButton = document.getElementById('mobile-menu-button');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const mobileMenu = document.getElementById('mobile-menu');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function setActiveLink(targetId) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>navLinks.forEach(link =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>link.classList.remove('active');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (link.getAttribute('href') === `#${targetId}`) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>link.classList.add('active');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function showSection(targetId) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>sections.forEach(section =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>section.classList.remove('active');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (section.id === targetId) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>section.classList.add('active');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>setActiveLink(targetId);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (mobileMenu.classList.contains('block')) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>mobileMenu.classList.remove('block');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>mobileMenu.classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>window.scrollTo({ top: 0, behavior: 'smooth' });</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>navLinks.forEach(link =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>link.addEventListener('click', function (e) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>e.preventDefault();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const targetId = this.getAttribute('href').substring(1);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>showSection(targetId);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Update URL hash without page jump for better UX, still allows bookmarking</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if(history.pushState) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>history.pushState(null, null, `#${targetId}`);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>location.hash = `#${targetId}`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>mobileMenuButton.addEventListener('click', function() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>mobileMenu.classList.toggle('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>mobileMenu.classList.toggle('block');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Tab functionality</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function setupTabs(tabContainerId, buttonClass, contentClass) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const tabButtonsContainer = document.getElementById(tabContainerId + '-buttons');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if(!tabButtonsContainer) return;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const tabButtons = tabButtonsContainer.querySelectorAll('.' + buttonClass);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const tabContents = document.getElementById(tabContainerId + '-content').querySelectorAll('.' + contentClass);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (tabButtons.length &gt; 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Activate the first tab by default</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tabButtons[0].classList.add('active');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tabButtons[0].classList.remove('text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tabButtons[0].classList.add('text-[#007BFF]', 'border-[#007BFF]');</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const firstTabContent = Array.from(tabContents).find(content =&gt; content.dataset.tabContent === tabButtons[0].dataset.tab);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (firstTabContent) firstTabContent.classList.add('active');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>tabButtons.forEach(button =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>button.addEventListener('click', function () {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>tabButtons.forEach(btn =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>btn.classList.remove('active', 'text-[#007BFF]', 'border-[#007BFF]');</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>btn.classList.add('text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>});</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>this.classList.add('active', 'text-[#007BFF]', 'border-[#007BFF]');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>this.classList.remove('text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const targetTab = this.dataset.tab;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>tabContents.forEach(content =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>content.classList.remove('active');</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (content.dataset.tabContent === targetTab) {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>content.classList.add('active');</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>});</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>setupTabs('produits-tabs', 'produits-tab-button', 'produits-tab-content');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>setupTabs('investir-tabs', 'investir-tab-button', 'investir-tab-content');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>setupTabs('analyse-tabs', 'analyse-tab-button', 'analyse-tab-content');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Chart.js - Stock Chart</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const stockCtx = document.getElementById('stockChart')?.getContext('2d');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const rsiCtx = document.getElementById('rsiChart')?.getContext('2d');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let stockChartInstance, rsiChartInstance;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (stockCtx) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const initialStockData = {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>labels: Array.from({length: 20}, (_, i) =&gt; `Jour ${i + 1}`),</p>
+<p class="p1"><span class="Apple-converted-space">                </span>datasets: [</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>label: 'Cours GEC (€)',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>data: [50, 51, 53, 52, 54, 56, 55, 57, 59, 58, 60, 59, 57, 58, 56, 58, 61, 60, 62, 63],</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>borderColor: '#007BFF',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>backgroundColor: 'rgba(0, 123, 255, 0.1)',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>tension: 0.1,</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>fill: true,</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>yAxisID: 'y',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>label: 'Volume',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>data: [1000, 1200, 1500, 1100, 1600, 1800, 1300, 1900, 2200, 1700, 2500, 2000, 1800, 1600, 2000, 2400, 2800, 2300, 3000, 2700],</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>backgroundColor: 'rgba(108, 117, 125, 0.5)',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>borderColor: '#6C757D',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>type: 'bar',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>yAxisID: 'y1',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>]</p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const stockConfig = {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>type: 'line', // Main chart type is line, volume is bar</p>
+<p class="p1"><span class="Apple-converted-space">                </span>data: initialStockData,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>responsive: true,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>maintainAspectRatio: false,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>interaction: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>mode: 'index',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>intersect: false,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>scales: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>y: {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>type: 'linear',</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>display: true,</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>position: 'left',</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>title: { display: true, text: 'Cours (€)'}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>y1: {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>type: 'linear',</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>display: true,</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>position: 'right',</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>title: { display: true, text: 'Volume'},</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>grid: { drawOnChartArea: false, },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>plugins: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>tooltip: {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>callbacks: {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>label: function(context) {</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>let label = context.dataset.label || '';</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>if (label) { label += ': '; }</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>if (context.parsed.y !== null) {</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>label += context.parsed.y;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>if (context.dataset.yAxisID === 'y') label += ' €';</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>return label;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>legend: { display: true }</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p1"><span class="Apple-converted-space">            </span>stockChartInstance = new Chart(stockCtx, stockConfig);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// RSI Chart (initially hidden)</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const initialRsiData = calculateRSI(initialStockData.datasets[0].data, 14);</p>
+<p class="p1"><span class="Apple-converted-space">             </span>const rsiConfig = {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>type: 'line',</p>
+<p class="p1"><span class="Apple-converted-space">                </span>data: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>labels: initialStockData.labels.slice(13), // RSI starts after 14 periods</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>datasets: [{</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>label: 'RSI (14)',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>data: initialRsiData,</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>borderColor: '#28A745', // Green</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>backgroundColor: 'rgba(40, 167, 69, 0.1)',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>tension: 0.1,</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>fill: true,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}]</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>responsive: true,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>maintainAspectRatio: false,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>scales: { y: { min: 0, max: 100, title: {display: true, text: 'RSI'} } },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>plugins: { legend: { display: false } }</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (rsiCtx) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>rsiChartInstance = new Chart(rsiCtx, rsiConfig);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Chart interactivity</p>
+<p class="p1"><span class="Apple-converted-space">            </span>function addMovingAverage(period, color, label) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const closingPrices = stockChartInstance.data.datasets[0].data;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const maData = calculateMA(closingPrices, period);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>stockChartInstance.data.datasets.push({</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>label: label,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>data: maData,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>borderColor: color,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>borderWidth: 2,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>tension: 0.1,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>fill: false,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>pointRadius: 0, // No dots on MA lines</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>yAxisID: 'y'</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p1"><span class="Apple-converted-space">                </span>stockChartInstance.update();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>function removeDatasetByLabel(label) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const datasetIndex = stockChartInstance.data.datasets.findIndex(ds =&gt; ds.label === label);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (datasetIndex &gt; -1) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>stockChartInstance.data.datasets.splice(datasetIndex, 1);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>stockChartInstance.update();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let ma20Visible = false;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('toggleMA20')?.addEventListener('click', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (ma20Visible) removeDatasetByLabel('MA 20'); else addMovingAverage(20, '#FFC107', 'MA 20'); // Amber</p>
+<p class="p1"><span class="Apple-converted-space">                </span>ma20Visible = !ma20Visible;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let ma50Visible = false;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('toggleMA50')?.addEventListener('click', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (ma50Visible) removeDatasetByLabel('MA 50'); else addMovingAverage(50, '#DC3545', 'MA 50'); // Red</p>
+<p class="p1"><span class="Apple-converted-space">                </span>ma50Visible = !ma50Visible;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let rsiVisible = false;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const rsiChartContainer = document.getElementById('rsiChartContainer');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('toggleRSI')?.addEventListener('click', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>rsiVisible = !rsiVisible;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (rsiChartContainer) rsiChartContainer.style.display = rsiVisible ? 'block' : 'none';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Helper functions for indicators</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function calculateMA(data, period) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (data.length &lt; period) return [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const ma = [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>for (let i = 0; i &lt; period -1; i++) ma.push(null); // Fill initial with null</p>
+<p class="p1"><span class="Apple-converted-space">            </span>for (let i = period - 1; i &lt; data.length; i++) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>let sum = 0;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>for (let j = 0; j &lt; period; j++) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>sum += data[i - j];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>ma.push(sum / period);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>return ma;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function calculateRSI(prices, period = 14) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const rsi = [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (prices.length &lt;= period) return [];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let gains = 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let losses = 0;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Calculate initial average gain and loss</p>
+<p class="p1"><span class="Apple-converted-space">            </span>for (let i = 1; i &lt;= period; i++) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const diff = prices[i] - prices[i-1];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (diff &gt; 0) gains += diff;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else losses -= diff; // losses are positive values</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let avgGain = gains / period;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let avgLoss = losses / period;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (avgLoss === 0) rsi.push(100);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const rs = avgGain / avgLoss;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>rsi.push(100 - (100 / (1 + rs)));</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Calculate subsequent RSI values</p>
+<p class="p1"><span class="Apple-converted-space">            </span>for (let i = period + 1; i &lt; prices.length; i++) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const diff = prices[i] - prices[i-1];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>let currentGain = 0;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>let currentLoss = 0;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (diff &gt; 0) currentGain = diff;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else currentLoss = -diff;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>avgGain = (avgGain * (period - 1) + currentGain) / period;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>avgLoss = (avgLoss * (period - 1) + currentLoss) / period;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (avgLoss === 0) rsi.push(100);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const rs = avgGain / avgLoss;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>rsi.push(100 - (100 / (1 + rs)));</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>return rsi;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Handle initial hash for direct navigation</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (window.location.hash) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const initialTargetId = window.location.hash.substring(1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const sectionExists = Array.from(sections).some(s =&gt; s.id === initialTargetId);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (sectionExists) {</p>
+<p class="p1"><span class="Apple-converted-space">                 </span>showSection(initialTargetId);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                 </span>showSection('accueil'); // Default to accueil if hash is invalid</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>showSection('accueil'); // Default to accueil if no hash</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
